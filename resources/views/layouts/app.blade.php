@@ -21,9 +21,9 @@
 <body>
 
     @if(session('status'))
-        <div class="success">
-            {{ session('status') }}
-        </div>
+    <div class="success" style="background:#d4edda; padding:15px; margin:20px 0; border:1px solid green;">
+        success: {{ session('status') }}
+    </div>
     @endif
 
     @yield('content')

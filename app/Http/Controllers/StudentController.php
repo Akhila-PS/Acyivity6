@@ -29,13 +29,13 @@ class StudentController extends Controller
         $student->semester   = $request->semester;
         $student->cgpa       = $request->cgpa;
         $student->save();
-
-        return redirect('/students')->with('status', 'Student created successfully!');
     } catch (\Exception $e) {
-        // If roll number already exists, still redirect with a message
-        return redirect('/students')->with('status', 'Student created successfully!');
+        // ignore duplicate error
     }
+
+    return redirect('/students')->with('status', 'Student created successfully!');
 }
+    
 
     public function show(Student $student)
     {
