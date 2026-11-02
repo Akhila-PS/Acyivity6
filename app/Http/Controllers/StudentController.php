@@ -19,21 +19,18 @@ class StudentController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'roll_no'    => 'required',
-            'name'       => 'required',
-            'email'      => 'required|email',
-            'department' => 'required',
-            'semester'   => 'required|integer',
-            'cgpa'       => 'required|numeric',
-        ]);
+{
+    Student::create([
+        'roll_no'    => $request->roll_no,
+        'name'       => $request->name,
+        'email'      => $request->email,
+        'department' => $request->department,
+        'semester'   => $request->semester,
+        'cgpa'       => $request->cgpa,
+    ]);
 
-        Student::create($request->all());
-
-        return redirect()->route('students.index')
-                         ->with('status', 'Student created successfully!');
-    }
+    return redirect('/students')->with('status', 'Student created successfully!');
+}
 
     public function show(Student $student)
     {
