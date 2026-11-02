@@ -20,14 +20,14 @@ class StudentController extends Controller
 
     public function store(Request $request)
 {
-    Student::create([
-        'roll_no'    => $request->roll_no,
-        'name'       => $request->name,
-        'email'      => $request->email,
-        'department' => $request->department,
-        'semester'   => $request->semester,
-        'cgpa'       => $request->cgpa,
-    ]);
+    $student = new \App\Models\Student();
+    $student->roll_no    = $request->roll_no;
+    $student->name       = $request->name;
+    $student->email      = $request->email;
+    $student->department = $request->department;
+    $student->semester   = $request->semester;
+    $student->cgpa       = $request->cgpa;
+    $student->save();
 
     return redirect('/students')->with('status', 'Student created successfully!');
 }
