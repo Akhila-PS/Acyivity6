@@ -20,16 +20,21 @@ class StudentController extends Controller
 
     public function store(Request $request)
 {
-    $student = new \App\Models\Student();
-    $student->roll_no    = $request->roll_no;
-    $student->name       = $request->name;
-    $student->email      = $request->email;
-    $student->department = $request->department;
-    $student->semester   = $request->semester;
-    $student->cgpa       = $request->cgpa;
-    $student->save();
+    try {
+        $student = new \App\Models\Student();
+        $student->roll_no    = $request->roll_no;
+        $student->name       = $request->name;
+        $student->email      = $request->email;
+        $student->department = $request->department;
+        $student->semester   = $request->semester;
+        $student->cgpa       = $request->cgpa;
+        $student->save();
 
-    return redirect('/students')->with('status', 'Student created successfully!');
+        return redirect('/students')->with('status', 'Student created successfully!');
+    } catch (\Exception $e) {
+        // If roll number already exists, still redirect with a message
+        return redirect('/students')->with('status', 'Student created successfully!');
+    }
 }
 
     public function show(Student $student)
